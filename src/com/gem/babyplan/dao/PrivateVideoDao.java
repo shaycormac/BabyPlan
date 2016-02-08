@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,17 +33,16 @@ public class PrivateVideoDao
 				//建立联结
 				conn=DBConnection.getConnection();
 				//准备查询语句
-				String sql ="insert into privatevideo(privateId,classNumber,privateAddress,privateTime,privateVideoURL,privateDescribe,privateThumbnail) values(?,?,?,?,?,?,?)";
+				String sql ="insert into privatevideo(classNumber,privateAddress,privateTime,privateVideoURL,privateDescribe,privateThumbnail) values(?,?,?,?,?,?,?)";
 				
 				pStatement=conn.prepareStatement(sql);
 				//放入占位符对应的参数
-				pStatement.setInt(1, pv.getPrivateId());
-				pStatement.setString(2, pv.getClasses().getClassNumber());
-				pStatement.setInt(3, pv.getPrivateAddress());
-				pStatement.setDate(4, new Date(pv.getPrivateTime().getTime()));
-				pStatement.setString(5, pv.getPrivateVideoURL());
-				pStatement.setString(6, pv.getPrivateDescribe());
-				pStatement.setString(7, pv.getPrivateThumbnail());
+				pStatement.setString(1, pv.getClasses().getClassNumber());
+				pStatement.setInt(2, pv.getPrivateAddress());
+				pStatement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+				pStatement.setString(4, pv.getPrivateVideoURL());
+				pStatement.setString(5, pv.getPrivateDescribe());
+				pStatement.setString(6, pv.getPrivateThumbnail());
 				//执行数据库的操作
 				pStatement.executeUpdate();
 				/*if (i>0) 
@@ -170,7 +170,7 @@ public class PrivateVideoDao
 					pVideo.setPrivateDescribe(rSet.getString("privateDescribe"));
 					pVideo.setPrivateId(rSet.getInt("privateId"));
 					pVideo.setPrivateThumbnail(rSet.getString("privateThumbnail"));
-					pVideo.setPrivateTime(rSet.getDate("privateTime"));
+					pVideo.setPrivateTime(rSet.getTimestamp("privateTime"));
 					pVideo.setPrivateVideoURL(rSet.getString("privateVideoURL"));
 				}
 				
@@ -222,7 +222,7 @@ public class PrivateVideoDao
 					pVideo.setPrivateDescribe(rSet.getString("privateDescribe"));
 					pVideo.setPrivateId(rSet.getInt("privateId"));
 					pVideo.setPrivateThumbnail(rSet.getString("privateThumbnail"));
-					pVideo.setPrivateTime(rSet.getDate("privateTime"));
+					pVideo.setPrivateTime(rSet.getTimestamp("privateTime"));
 					pVideo.setPrivateVideoURL(rSet.getString("privateVideoURL"));
 					list.add(pVideo);	
 				}
@@ -279,7 +279,7 @@ public class PrivateVideoDao
 					pVideo.setPrivateDescribe(rSet.getString("privateDescribe"));
 					pVideo.setPrivateId(rSet.getInt("privateId"));
 					pVideo.setPrivateThumbnail(rSet.getString("privateThumbnail"));
-					pVideo.setPrivateTime(rSet.getDate("privateTime"));
+					pVideo.setPrivateTime(rSet.getTimestamp("privateTime"));
 					pVideo.setPrivateVideoURL(rSet.getString("privateVideoURL"));
 					list.add(pVideo);	
 				}

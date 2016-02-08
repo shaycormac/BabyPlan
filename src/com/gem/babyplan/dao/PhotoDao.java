@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +34,13 @@ public class PhotoDao
 		PreparedStatement pStatement=null;
 		try {
 			conn=DBConnection.getConnection();
-			String sql ="insert into photo(photoId,albumId,photoURL,photoPublishTime,photoDescribe) values(?,?,?,?,?)";
+			String sql ="insert into photo(albumId,photoURL,photoPublishTime,photoDescribe) values(?,?,?,?,?)";
 			pStatement=conn.prepareStatement(sql);
-			pStatement.setInt(1, photo.getPhotoId());
-			pStatement.setInt(2, photo.getAlbum().getAlbumId());
-			pStatement.setString(3, photo.getPhotoURL());
-			pStatement.setDate(4, new Date(photo.getPhotoPublishTime().getTime()));
-			pStatement.setString(5, photo.getPhotoDescribe());
+			
+			pStatement.setInt(1, photo.getAlbum().getAlbumId());
+			pStatement.setString(2, photo.getPhotoURL());
+			pStatement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			pStatement.setString(4, photo.getPhotoDescribe());
 			pStatement.executeUpdate();
 			/*if (i>0) 
 			{
@@ -157,7 +158,7 @@ public class PhotoDao
 				p.setAlbum(album);
 				p.setPhotoDescribe(rSet.getString("photoDescribe"));
 				p.setPhotoId(rSet.getInt("photoId"));
-				p.setPhotoPublishTime(rSet.getDate("photoPublishTime"));
+				p.setPhotoPublishTime(rSet.getTimestamp("photoPublishTime"));
 				p.setPhotoURL(rSet.getString("photoURL"));
 			}
 			
@@ -206,7 +207,7 @@ public class PhotoDao
 				p.setAlbum(album);
 				p.setPhotoDescribe(rSet.getString("photoDescribe"));
 				p.setPhotoId(rSet.getInt("photoId"));
-				p.setPhotoPublishTime(rSet.getDate("photoPublishTime"));
+				p.setPhotoPublishTime(rSet.getTimestamp("photoPublishTime"));
 				p.setPhotoURL(rSet.getString("photoURL"));
 				list.add(p);	
 			}
@@ -260,7 +261,7 @@ public class PhotoDao
 				p.setAlbum(album);
 				p.setPhotoDescribe(rSet.getString("photoDescribe"));
 				p.setPhotoId(rSet.getInt("photoId"));
-				p.setPhotoPublishTime(rSet.getDate("photoPublishTime"));
+				p.setPhotoPublishTime(rSet.getTimestamp("photoPublishTime"));
 				p.setPhotoURL(rSet.getString("photoURL"));
 				list.add(p);	
 			}

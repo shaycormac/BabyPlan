@@ -33,18 +33,8 @@ public class PhotoDaoTest
 		Album album=aDao.getAlbumByAlbumId(2);
 		Photo photo = new Photo();
 		photo.setAlbum(album);
-		photo.setPhotoDescribe("尼玛");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String current=sdf.format(new Date());
-		System.out.println(current);
-		try {
-			
-			photo.setPhotoPublishTime(sdf.parse(current));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		photo.setPhotoDescribe("呵呵");
+	
 		photo.setPhotoURL("/servlet/edward/1.jpg");
 		pDao.addPhoto(photo);
 		

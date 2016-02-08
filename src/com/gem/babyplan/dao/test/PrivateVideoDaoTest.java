@@ -37,13 +37,12 @@ public class PrivateVideoDaoTest
 	 @Test
 		public void testAdd()
 		{
-			Classes c =new ClassesDao().getClassesByClassNumber("中班");
+			Classes c =new ClassesDao().getClassesByClassNumber("大班");
 			PrivateVideo p = new PrivateVideo();
 			p.setClasses(c);
 			p.setPrivateAddress(1);
-			p.setPrivateDescribe("萌萌瞬间");
+			p.setPrivateDescribe("狗狗");
 			p.setPrivateThumbnail("/Altair/2.jpg");
-			p.setPrivateTime(new Date());
 			p.setPrivateVideoURL("/Altair/2.mp4");
 			pv.addPrivateVideo(p);
 			
